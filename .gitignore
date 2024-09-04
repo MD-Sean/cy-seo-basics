@@ -1,0 +1,13 @@
+# Don't check auto-generated stuff into git
+node_modules
+# Cruft
+.DS_Store
+.idea
+*.map
+*.log
+.env
+coverage
+cypress/screenshots
+cypress/videos
+cypress/logs
+cypress/reports

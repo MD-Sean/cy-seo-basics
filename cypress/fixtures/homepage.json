@@ -1,0 +1,17 @@
+{
+    "url": "https://www.mudah.my",
+    "canonical": "https://www.mudah.my",
+    "title": {
+        "keyword": "buy & sell"
+    },
+    "desc": {
+        "keyword": "buy & sell"
+    },
+    "H1": {
+        "keyword": "Mudah"
+    },
+    "H2": {
+        "keyword": "Mudah"
+    },
+    "body": "Fixtures are a great way to mock data for responses to routes"
+}
