@@ -1,11 +1,12 @@
 {
-    "url": "https://www.mudah.my/malaysia/all",
-    "canonical": "https://www.mudah.my/malaysia/cars-for-sale",
+    "home": "https://www.mudah.my",
+    "url": "https://www.mudah.my/property-for-sale",
+    "canonical": "https://www.mudah.my/property-for-sale",
     "title": {
-        "keyword": "Buy & Sell"
+        "keyword": "buy, sell, find or rent"
     },
     "desc": {
-        "keyword": "Buy & Sell"
+        "keyword": "happy buying and selling"
     },
     "H1": {
         "keyword": "Mudah"

@@ -4,8 +4,10 @@ module.exports = defineConfig({
   projectId: "4dtiya",
   e2e: {
     setupNodeEvents(on, config) {
-      // Implement node event listeners if necessary
-      // If not needed, this can remain empty
+      on("before:browser:launch", (browser = {}, launchOptions) => {
+        // Add any browser-specific launch options here
+        return launchOptions;
+      });
     },
   },
   reporter: "mocha-multi-reporters",

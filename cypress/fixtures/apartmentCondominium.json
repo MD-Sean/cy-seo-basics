@@ -1,0 +1,70 @@
+{
+    "for-sale": {
+        "category": "Properties",
+        "type": "Properties for Sale",
+        "subCategory": "Apartment / Condominium",
+        "home": "https://www.mudah.my",
+        "tag": "Property for Sale",
+        "canonical": "https://www.mudah.my/malaysia/apartment-condominium-for-sale",
+        "title": {
+            "keyword": "Apartment / Condominium for sale in Malaysia - Mudah.my"
+        },
+        "desc": {
+            "keyword": "Find apartment / condominium for sale in Malaysia on Mudah.my, Malaysia's largest marketplace. Happy Buying and Selling!"
+        },
+        "H1": {
+            "keyword": "Apartment / Condominium for sale in Malaysia"
+        },
+        "H2": {
+            "keyword": "Mudah"
+        },
+        "query": [
+            {
+                "q": "hampton country heights",
+                "canonical": "https://www.mudah.my/malaysia/apartment-condominium-for-salehampton+country+heights"
+            },
+            {
+                "q": "i-soho @ i-city",
+                "canonical": "https://www.mudah.my/selangor-shah-alam/apartment-condominium-for-sale/i-soho-i-city"
+            },
+            {
+                "q": "flora damansara",
+                "canonical": "https://www.mudah.my/selangor-damansara-perdana/apartment-condominium-for-sale/flora-damansara"
+            }
+        ]
+    },
+    "for-rent": {
+        "category": "Properties",
+        "type": "Properties for Rent",
+        "subCategory": "Apartment / Condominium",
+        "home": "https://www.mudah.my",
+        "tag": "Property for Rent",
+        "canonical": "https://www.mudah.my/malaysia/apartment-condominium-for-rent",
+        "title": {
+            "keyword": "Apartment / Condominium for rent in Malaysia - Mudah.my"
+        },
+        "desc": {
+            "keyword": "Find apartment / condominium for rent in Malaysia on Mudah.my, Malaysia's largest marketplace. Happy Buying and Selling!"
+        },
+        "H1": {
+            "keyword": "Apartment / Condominium for rent in Malaysia"
+        },
+        "H2": {
+            "keyword": "Mudah"
+        },
+        "query": [
+            {
+                "q": "i-soho @ i-city",
+                "canonical": "https://www.mudah.my/selangor-shah-alam/apartment-condominium-for-rent/i-soho-i-city"
+            },
+            {
+                "q": "flora damansara",
+                "canonical": "https://www.mudah.my/selangor-damansara-perdana/apartment-condominium-for-rent/flora-damansara"
+            },
+            {
+                "q": "hampton country heights",
+                "canonical": "https://www.mudah.my/malaysia/apartment-condominium-for-renthampton+country+heights"
+            }
+        ]
+    }
+}

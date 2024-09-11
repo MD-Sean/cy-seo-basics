@@ -1,11 +1,11 @@
 describe("Test with multiple fixtures", () => {
   // const fixtures = ["homepage", "listingpage"];
-  // const fixtures = ["listingpage"];
-  const fixtures = ["homepage"];
+  const fixtures = ["listingpage"];
+  // const fixtures = ["homepage"];
 
   let page;
   const userAgent =
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36";
+    "Mozilla/5.0 (Linux; Android 10; MI 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Mobile Safari/537.36";
 
   fixtures.forEach((fixture) => {
     describe(`Testing SEO Basics Test Suite for ${fixture}`, () => {
@@ -19,10 +19,12 @@ describe("Test with multiple fixtures", () => {
             page = pageData;
 
             cy.intercept("GET", "/**", (req) => {
+              delete req.headers["x-cypress-is-from-extra-target"];
               req.headers["user-agent"] = userAgent;
-            }).as("getWithHeaders");
+            }).as("modifiedRequest");
+
             cy.visit(page.url);
-            cy.wait("@getWithHeaders");
+            cy.wait("@modifiedRequest");
           });
         } else {
           throw new Error("No matching fixture found for the test title.");
@@ -40,7 +42,7 @@ describe("Test with multiple fixtures", () => {
           .should("exist")
           .invoke("text")
           .then((text) => {
-            expect(text.length).to.be.within(30, 100);
+            expect(text.length).to.be.within(30, 60);
             expect(text.toLowerCase()).to.include(page.title.keyword);
           });
 
@@ -92,7 +94,6 @@ describe("Test with multiple fixtures", () => {
         );
       });
 
-      // Test for ld+json syntax errors
       it(`${fixture}: should have valid ld+json structured data`, () => {
         cy.get('script[type="application/ld+json"]').each(($script) => {
           const json = $script[0].innerText;
@@ -122,6 +123,70 @@ describe("Test with multiple fixtures", () => {
             expect(data.name).to.be.a("string");
             expect(data.page).to.be.a("string");
           }
+        });
+      });
+
+      it(`${fixture} should have valid Merchant Listing structured data`, () => {
+        cy.get('script[type="application/ld+json"]').then(($scripts) => {
+          const found = Array.from($scripts).some(($script) => {
+            const json = JSON.parse($script.innerText);
+
+            if (json["@type"] === "Product") {
+              expect(json).to.have.property("name").and.to.be.a("string");
+              expect(json).to.have.property("image").and.to.be.a("string");
+              expect(json)
+                .to.have.property("description")
+                .and.to.be.a("string");
+              expect(json).to.have.property("sku").and.to.be.a("string");
+
+              // Validate 'brand' object if it exists
+              if (json.brand) {
+                expect(json.brand).to.have.property("@type", "Brand");
+                expect(json.brand)
+                  .to.have.property("name")
+                  .and.to.be.a("string");
+              }
+
+              // Validate 'review' object if it exists and ensure it's an array of reviews
+              if (json.review) {
+                expect(json.review).to.be.an("array").and.not.to.be.empty;
+                json.review.forEach((review) => {
+                  expect(review).to.have.property("@type", "Review");
+                  expect(review)
+                    .to.have.property("reviewRating")
+                    .and.to.be.an("object");
+                  expect(review.reviewRating).to.have.property(
+                    "@type",
+                    "Rating"
+                  );
+                  expect(review.reviewRating)
+                    .to.have.property("ratingValue")
+                    .and.to.be.a("string");
+                });
+              }
+
+              // Validate 'offers' object within the Product type
+              expect(json).to.have.property("offers").and.to.be.an("object");
+              expect(json.offers)
+                .to.have.property("price")
+                .and.to.be.a("string");
+              expect(json.offers)
+                .to.have.property("priceCurrency")
+                .and.to.be.a("string");
+              expect(json.offers)
+                .to.have.property("availability")
+                .and.to.be.a("string");
+
+              // All checks passed
+              return true;
+            }
+
+            // Return false if this script does not match the required structured data
+            return false;
+          });
+
+          // Fail the test if no valid Merchant Listing structured data was found
+          expect(found).to.be.true;
         });
       });
     });
